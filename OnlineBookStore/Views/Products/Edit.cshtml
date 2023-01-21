@@ -1,0 +1,66 @@
+﻿@model OnlineBookStore.Models.Product
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="text-md-center">Edit Book</h2>
+
+
+@using (Html.BeginForm())
+{
+
+    <div class="mb-2">
+        @Html.LabelFor(p => p.BookName, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.BookName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.BookName)
+    </div>
+
+
+    <div class="mb-2">
+        @Html.LabelFor(p => p.ISBN, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.ISBN, new { @class = "form-control", @disabled = "disabled" })
+        @Html.ValidationMessageFor(p => p.ISBN)
+    </div>
+    <div class="mb-2">
+        @Html.LabelFor(p => p.AuthorName, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.AuthorName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.AuthorName)
+    </div>
+
+    <div class="mb-2">
+        @Html.LabelFor(p => p.Publisher, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.Publisher, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Publisher)
+    </div>
+
+    <div class="mb-2">
+        @Html.LabelFor(p => p.Description, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Description)
+    </div>
+
+    <div class="mb-2">
+        @Html.LabelFor(p => p.BookType, new { @class = "form-label" })
+        @Html.DropDownListFor(p => p.BookType, new SelectList(ViewBag.BookTypes, "Id", "BookTypeName"), "--Select--", new { @class = "form-select" })
+        @Html.ValidationMessageFor(p => p.BookType)
+
+    </div>
+    <div class="mb-2">
+        @Html.LabelFor(p => p.Price, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Price)
+
+    </div>
+
+    <div class="mb-2">
+        @Html.LabelFor(p => p.PublishedDate, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.PublishedDate, new { @class = "form-control", @disabled = "disabled" })
+        @Html.ValidationMessageFor(p => p.PublishedDate)
+    </div>
+
+
+    <div class="mt-2">
+        <input type="submit" id="BtnSubmit" class="btn btn-primary" value="Update" />
+    </div>
+}
+

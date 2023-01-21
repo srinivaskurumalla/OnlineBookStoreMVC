@@ -1,0 +1,53 @@
+﻿@model List<OnlineBookStore.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List Of Books</h2>
+@Html.ActionLink("Add New", "Create", "Products", null, new { @class = "btn btn-info" })
+<hr />
+<div class="row">
+    <div class="col-md-auto">
+        <table class="table table-c table-hover">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Book Name
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Price
+                </th>
+               
+                <th>Action</th>
+            </tr>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Id</td>
+
+                    <td>@Html.ActionLink(p.BookName, "Details", "Products", new { id = p.Id }, null) </td>
+                    <td>@p.AuthorName</td>
+                    <td>@p.Price</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Products", new { id = p.Id }, new { @class = "btn btn-info" })
+                    @* @Html.ActionLink("Delete","Delete","Products",new {id = p.Id}, new {@class = "btn btn-danger"})*@
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Products", new { id = p.Id }, FormMethod.Post))
+                    {
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+        </table>
+
+    </div>
+</div>
+
+
