@@ -22,15 +22,17 @@ namespace OnlineBookStore.Models
         [Display(Name = "Book Name")]
         [Column(TypeName = "varchar")]
         [StringLength(50)]
+        [Index(IsUnique = true)]
         public string BookName { get; set; }
 
         [Required(ErrorMessage = "ISBN is mandatory")]
         [Display(Name = "ISBN")]
         [Column(TypeName = "varchar")]
         [StringLength(50)]
+        [Index(IsUnique = true)]
         public string ISBN { get; set; }
 
-        [Required(ErrorMessage = "Authoe name is mandatory")]
+        [Required(ErrorMessage = "Author name is mandatory")]
         [Display(Name = "Author Name")]
         [Column(TypeName = "varchar")]
         [StringLength(50)]
@@ -60,15 +62,19 @@ namespace OnlineBookStore.Models
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Published Date is mandatory")]
-        [Display(Name = "Publisher Date")]
+        [Display(Name = "Published Date")]
         [Column(TypeName = "Date")]
-        
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+
         public DateTime PublishedDate { get; set; }
 
         //Navigation
         public BookType BookType { get; set; }
 
+      
         public int BookTypeId { get; set; }
+
+        
 
 
 

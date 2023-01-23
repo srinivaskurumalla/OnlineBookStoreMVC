@@ -1,0 +1,32 @@
+﻿@model OnlineBookStore.Models.UserRoleViewModel
+@{
+    ViewBag.Title = "AddRole";
+}
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-3 border rounded-2 p-3 shadow-lg">
+        <div class="h3">Add Role to User</div>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div class="mb-2">
+                @Html.LabelFor(p => p.UserId, new { @class = "form-label" })
+                @Html.DropDownListFor(p => p.UserId, new SelectList(Model.Users, "Id", "Name"), "--Select--", new { @class = "form-select" })
+                @Html.ValidationMessageFor(p => p.UserId)
+            </div>
+            <div class="mb-2">
+                @Html.LabelFor(p => p.RoleId, new { @class = "form-label" })
+                @Html.DropDownListFor(p => p.RoleId, new SelectList(Model.Roles, "Id", "RoleName"), "--Select--", new { @class = "form-select" })
+                @Html.ValidationMessageFor(p => p.RoleId)
+            </div>
+
+            <div class="mt-3 d-grid">
+                <input type="submit" id="btnSubmit" class="btn btn-primary" value="Apply Role" />
+            </div>
+        }
+    </div>
+    </div>
+

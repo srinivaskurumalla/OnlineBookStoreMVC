@@ -13,9 +13,18 @@ namespace OnlineBookStore.Models
 
         }
 
+        //Book Details
         public DbSet<Product> Books { get; set; }
 
+        //Book Types
         public DbSet<BookType> BookTypes { get; set; }
+
+
+        //For Authentication 
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRolesMapping> UserRolesMappings { get; set; }
 
     }
 }

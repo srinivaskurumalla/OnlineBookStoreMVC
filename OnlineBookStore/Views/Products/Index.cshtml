@@ -1,53 +1,106 @@
-﻿@model List<OnlineBookStore.Models.Product>
+﻿@using PagedList;
+@using PagedList.Mvc
+
+@model IPagedList<OnlineBookStore.Models.Product>
 @{
     ViewBag.Title = "Index";
 }
+<div class="mx-auto d-block container">
+    <div class="row">
 
-<h2>List Of Books</h2>
-@Html.ActionLink("Add New", "Create", "Products", null, new { @class = "btn btn-info" })
-<hr />
-<div class="row">
-    <div class="col-md-auto">
-        <table class="table table-c table-hover">
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Book Name
-                </th>
-                <th>
-                    Author
-                </th>
-                <th>
-                    Price
-                </th>
-               
-                <th>Action</th>
-            </tr>
-            @foreach (var p in Model)
+        <div class="col-3 mt-5"></div>
+        <h2 class="col-6 mt-5 mb-5 d-flex justify-content-center ">Total Books Available</h2>
+        <div class="col-2 mt-5">
+            @Html.ActionLink("Add New", "Create", "Products", null, new { @class = "btn btn-info" })
+        </div>
+
+
+        <br />
+
+        <div class="col-6"></div>
+        <div class="d-flex justify-content-center">
+            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
             {
-                <tr>
-                    <td>@p.Id</td>
 
-                    <td>@Html.ActionLink(p.BookName, "Details", "Products", new { id = p.Id }, null) </td>
-                    <td>@p.AuthorName</td>
-                    <td>@p.Price</td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "Products", new { id = p.Id }, new { @class = "btn btn-info" })
-                    @* @Html.ActionLink("Delete","Delete","Products",new {id = p.Id}, new {@class = "btn btn-danger"})*@
-                </td>
-                <td>
-                    @using (Html.BeginForm("Delete", "Products", new { id = p.Id }, FormMethod.Post))
-                    {
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    }
-                </td>
-            </tr>
-        }
-        </table>
+                <div class="input-group m-auto mb-3">
+
+                    <input type="text" name="search" id="search" class="form-control " placeholder="Enter Book Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+
+                    <button class="btn btn-outline-secondary" type="submit" value="search" id="button-addon2">Search</button>
+                </div>
+            }
+        </div>
 
     </div>
-</div>
+    <div>
+        <div class="table">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 ">
 
 
+                  
+
+                        <div class="col-md-auto border rounded-2 p-3 shadow-lg">
+                            @* <div class="row">
+                            <div class="col-md-auto">*@
+                            <table class="table table-c table-hover">
+                                <tr>
+                                    <th>
+                                        Id
+                                    </th>
+                                    <th>
+                                        @Html.ActionLink("Book Name", "Index", new { sortBy = ViewBag.SortNameParameter, search = Request["search"] })
+
+                                    </th>
+                                    <th>
+                                        Author
+                                    </th>
+                                    <th>
+                                        @Html.ActionLink("Price", "Index", new { sortBy = ViewBag.SortPriceParameter, search = Request["search"] })
+                                    </th>
+
+                                    <th>Action</th>
+                                </tr>
+                                @if (Model.Count == 0)
+                                {
+                                    <tr>
+                                        <td colspan="5">No Book starts with  Match with search criteria</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    foreach (var p in Model)
+                                    {
+                                        <tr>
+                                            <td>@p.Id</td>
+
+                                            <td>@Html.ActionLink(p.BookName, "Details", "Products", new { id = p.Id }, null) </td>
+                                            <td>@p.AuthorName</td>
+                                            <td>@p.Price</td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", "Products", new { id = p.Id }, new { @class = "btn btn-info" })
+                                                @* @Html.ActionLink("Delete","Delete","Products",new {id = p.Id}, new {@class = "btn btn-danger"})*@
+                                            </td>
+                                            <td>
+                                                @using (Html.BeginForm("Delete", "Products", new { id = p.Id }, FormMethod.Post))
+                                                {
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </table>
+
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], sortBy = Request["sortBy"] }),
+                                                 new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true, ClassToApplyToFirstListItemInPager = "pager-first" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    

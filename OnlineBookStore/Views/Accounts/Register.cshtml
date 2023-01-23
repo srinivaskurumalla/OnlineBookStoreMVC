@@ -1,0 +1,58 @@
+﻿@model OnlineBookStore.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+
+<div class="row mt-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-5 border rounded-2 p-3">
+        <div class="display-6">Create New Account</div>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            // @Html.ValidationSummary()
+            <div class="mb-2">
+                @Html.LabelFor(p => p.EmailId, new { @class = "form-label" })
+                @Html.TextBoxFor(p => p.EmailId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.EmailId)
+            </div>
+            <div class="mb-2">
+                @Html.LabelFor(p => p.Username, new { @class = "form-label" })
+                @Html.TextBoxFor(p => p.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.Username)
+            </div>
+            <div class="mb-2">
+                @Html.LabelFor(p => p.Password, new { @class = "form-label" })
+                @Html.TextBoxFor(p => p.Password, new { @class = "form-control", type = "password" })
+                @Html.ValidationMessageFor(p => p.Password)
+            </div>
+            <div class="mb-2">
+                @Html.LabelFor(p => p.ConfirmPassword, new { @class = "form-label" })
+                @Html.TextBoxFor(p => p.ConfirmPassword, new { @class = "form-control", type = "password" })
+                @Html.ValidationMessageFor(p => p.ConfirmPassword)
+            </div>
+
+
+            <div class="mt-2">
+                <input type="submit" id="btnSubmit" class="btn btn-primary" value="Register" />
+                <input type="reset" id="btnReset" class="btn btn-warning" value="Reset" />
+            </div>
+        }
+
+        <hr />
+        <div class="mt-3">
+            <span>Already a user? </span>@Html.ActionLink("Login", "Login", "Accounts")
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+    {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

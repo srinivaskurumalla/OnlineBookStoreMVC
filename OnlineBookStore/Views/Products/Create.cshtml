@@ -1,12 +1,15 @@
 ﻿@model OnlineBookStore.Models.Product
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2 class="text-md-center">Edit Book</h2>
+<h2 class="text-md-center m-5">Add new Book</h2>
+
+
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     @* @Html.ValidationSummary()*@
     <div class="container-fluid">
 
@@ -25,7 +28,7 @@
 
                     <div class="mb-2">
                         @Html.LabelFor(p => p.ISBN, new { @class = "form-label" })
-                        @Html.TextBoxFor(p => p.ISBN, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.TextBoxFor(p => p.ISBN, new { @class = "form-control" })
                         @Html.ValidationMessageFor(p => p.ISBN)
                     </div>
                     <div class="mb-2">
@@ -65,17 +68,16 @@
 
                     </div>
 
-
                     <div class="mb-2">
-                        @Html.LabelFor(p => p.PublishedDate, new { @class = "form-label" })
-                        @Html.TextBoxFor(p => p.PublishedDate, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.LabelFor(p => p.PublishedDate, "Date", new { @class = "form-label" })
+                        @Html.TextBoxFor(p => p.PublishedDate, new { @class = "form-control", type = "Date" })
                         @Html.ValidationMessageFor(p => p.PublishedDate)
                     </div>
 
                 </div>
 
                 <div class="col-12">
-                    <input type="submit" id="BtnUpdate" class="btn btn-primary" value="Update" style="width:100%; margin-left:25%" />
+                    <input type="submit" id="BtnCreate" class="btn btn-primary" value="ADD" style="width:100%; margin-left:25%" />
                 </div>
 
 
@@ -85,13 +87,10 @@
 
 }
 
-
-
-
-
 @section Scripts
     {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
 
 

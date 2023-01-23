@@ -1,0 +1,37 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item  active">
+            <span class="visually-hidden">(current)</span>
+            @Html.ActionLink("Welcome " + User.Identity.Name, "", "", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item  active">
+            <span class="visually-hidden">(current)</span>
+            @Html.ActionLink("Logout", "Signout", "Accounts", null, new { @class = "nav-link" })
+        </li>
+        @if (User.IsInRole("Librarian"))
+        {
+            <li class="nav-item">
+                @Html.ActionLink("Add Role", "AddRole", "Accounts", null, new { @class = "nav-link" })
+            </li>
+        }
+    </ul>
+
+}
+else
+{
+
+
+    <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item  active">
+            <span class="visually-hidden">(current)</span>
+            @Html.ActionLink("SignUp", "Register", "Accounts", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item  active">
+            <span class="visually-hidden">(current)</span>
+            @Html.ActionLink("Login", "Login", "Accounts", null, new { @class = "nav-link" })
+        </li>
+    </ul>
+}

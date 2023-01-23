@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
    
 </head>
-<body>
+<body style="background-color:whitesmoke">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Book Store</a>
@@ -17,28 +17,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
+                   @* <li class="nav-item">
                         <a class="nav-link active" href="#">
                             Home
                             <span class="visually-hidden">(current)</span>
                         </a>
-                    </li>
-                  
-                    <li class="nav-item">
+                    </li>*@
+
+                    <li class="nav-item active">
                         <span class="visually-hidden">(current)</span>
-                        @Html.ActionLink("Index", "Index", "Products", null, new { @class = "nav-link" })
+                        @Html.ActionLink("AllBooks", "Index", "Products", null, new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item">
-                        <span class="visually-hidden">(current)</span>
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
+                   
                 </ul>
+                @Html.Partial("_LoginAndSignUp")
             </div>
         </div>
     </nav>
